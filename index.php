@@ -2,9 +2,9 @@
     include_once 'dependencies/phoneNumbers.php';
 
     $textProvider['verizon'] = '@vtext.com';
-    $textMessage = [
-        'day' => 'The morning sun has vanquished the horrible night',
-        'night' => 'What a horrible night to have a curse'
+    $textMessages = [
+        'am' => 'The morning sun has vanquished the horrible night',
+        'pm' => 'What a horrible night to have a curse'
     ];
 
     function buildTextArray($phoneNumbers, $textProvider) {
@@ -18,20 +18,30 @@
 
     $fullAddress = buildTextArray($phoneNumbers, $textProvider);
 
+    function setMessage($textMessages) {
+        return $textMessages[date('a')];
+
+    }
+
+    $message = setMessage($textMessages);
+
+
     echo '<pre>';
     print_r($fullAddress);
-    print_r($textMessage);
+    print_r($message);
     echo '</pre>';
 
     echo 'date_default_timezone_set: ' . date_default_timezone_get() . '<br />';
     echo date('g:i:s:a');
 
-    function sendText($fullTextAddres) {
-        foreach ($fullTextAddres as $text) {
-          mail($address, $email['subject'], $email['template'], $email['headers']);
+    function sendText($fullAddress, $message) {
+        foreach ($fullAddress as $text) {
+          mail('jonzielen@gmail.com', 'subject', $message);
         }
     }
 
+    //sendText($fullAddress, $message);
+mail('jonzielen@gmail.com', 'subject', $message);
 
 
 ?>
