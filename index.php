@@ -70,6 +70,4 @@
     echo '<pre>';
     var_dump(loopTimes($jsonAllData));
     echo '</pre>';
-
-
 ?>
